@@ -160,13 +160,13 @@
 };
 
 &mdss_dsi0 {
-	vdd-supply = <&pm8953_l17>;
+	/delete-property/ vdd-supply;
 	vddio-supply = <&pm8953_l6>;
 };
 
 &mdss_dsi1 {
 	status = "disabled";
-	vdd-supply = <&pm8953_l17>;
+	/delete-property/ vdd-supply;
 	vddio-supply = <&pm8953_l6>;
 };
 

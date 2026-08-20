@@ -255,12 +255,11 @@ enum msm_camera_i2c_operation {
 	MSM_CAM_WRITE = 0,
 	MSM_CAM_POLL,
 	MSM_CAM_READ,
-#define MSM_CAM_READ_LOOP \
-	MSM_CAM_READ_LOOP
 	MSM_CAM_READ_LOOP = 3,
 	MSM_CAM_READ_PAGE,
 	MSM_CAM_WRITE_DELAYUSEC,
 	MSM_CAM_READ_CONTINUOUS,
+	MSM_CAM_READ_GC5025A,
 };
 
 struct msm_sensor_i2c_sync_params {

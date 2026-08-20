@@ -1017,6 +1017,8 @@ void diag_send_error_rsp(unsigned char *buf, int len,
 
 	*(uint8_t *)driver->apps_rsp_buf = DIAG_CMD_ERROR;
 	memcpy((driver->apps_rsp_buf + sizeof(uint8_t)), buf, len);
+	print_hex_dump(KERN_INFO, "@ diag_send_error_rsp: ", DUMP_PREFIX_NONE, 
+		16, 1, driver->apps_rsp_buf, len, 0); 
 	diag_send_rsp(driver->apps_rsp_buf, len + 1, pid);
 }
 
@@ -1067,8 +1069,17 @@ int diag_process_apps_pkt(unsigned char *buf, int len, int pid)
 			entry.cmd_code_hi);
 	}
 
-	if ((len >= sizeof(uint8_t)) && *buf == DIAG_CMD_LOG_ON_DMND &&
-		driver->log_on_demand_support &&
+      pr_err("@ %s, pid[%d](%s) received cmd %02x %02x %02x\n",
+             __func__, pid, current->comm, entry.cmd_code,
+             entry.subsys_id, entry.cmd_code_hi);
+      print_hex_dump(KERN_INFO, "@ request packet: ", DUMP_PREFIX_NONE,
+              16, 1, buf, len, 0);
+
+      pr_debug("diag: In %s, received cmd %02x %02x %02x\n",
+               __func__, entry.cmd_code, entry.subsys_id, entry.cmd_code_hi);
+
+      if ((len >= sizeof(uint8_t)) && *buf == DIAG_CMD_LOG_ON_DMND &&
+              driver->log_on_demand_support &&
 	    driver->feature[PERIPHERAL_MODEM].rcvd_feature_mask) {
 		write_len = diag_cmd_log_on_demand(buf, len,
 						   driver->apps_rsp_buf,

@@ -201,6 +201,7 @@
 			regulator-max-microvolt = <1800000>;
 			qcom,init-voltage = <1800000>;
 			status = "okay";
+			regulator-always-on;
 		};
 	};
 
@@ -250,6 +251,7 @@
 			regulator-max-microvolt = <3300000>;
 			qcom,init-voltage = <2948000>;
 			status = "okay";
+			regulator-always-on;
 		};
 	};
 
@@ -353,7 +355,7 @@
 		status = "okay";
 		pm8953_l22: regulator-l22 {
 			regulator-min-microvolt = <2560000>;
-			regulator-max-microvolt = <2840000>;
+			regulator-max-microvolt = <3000000>;
 			qcom,init-voltage = <2560000>;
 			status = "okay";
 		};

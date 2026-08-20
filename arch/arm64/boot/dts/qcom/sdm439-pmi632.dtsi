@@ -15,11 +15,39 @@
 
 &pmi632_charger {
 	dpdm-supply = <&usb_otg>;
+/*LXF_P400_C01-196 zhubolin 2018-11-12*/
+	qcom,float-option = <1>;
+	qcom,fv-max-uv  = <4400000>;
+	qcom,usb-icl-ua = <2000000>;
+	qcom,fcc-max-ua = <2000000>;
+	qcom,otg-cl-ua = <1000000>; //otg output current limit
+/*LXF_P400_C01-281 zhubolin 2018-12-6 For thermal current limit*/
+	qcom,thermal-mitigation
+		= <2000000 1500000 1000000 800000 
+			500000 200000>;
+	qcom,auto-recharge-soc = <99>;
+	qcom,auto-recharge-vbat-mv = <4350>;
+	qcom,chg-term-src = <1>;
+	qcom,chg-term-current-ma = <(-170)>;
+/*LXF_P400_B01-456 zhubolin 2019-2-14 pogo charging bringup start*/
+	qcom,hvdcp-disable;
+	qcom,usb-state-gpio = <&tlmm 86 0>;
+	qcom,pogo-state-gpio = <&tlmm 90 0>;
+	qcom,otg-enable-gpio = <&tlmm 94 0>;
+	qcom,pogo-enable-gpio = <&tlmm 130 0>;
+/*LXF_P400_B01-456 zhubolin 2019-2-14 pogo charging bringup end*/
 };
 
 &usb_otg {
 	vbus_otg-supply = <&smb5_vbus>;
 	extcon = <&pmi632_charger>;
+//LXF_P400_B01-1812 zhubolin 20181027 Y-cable support bringup start
+	HSUSB_gpiopull-supply = <&pm8953_l16>;
+	qcom,usbid-vadc = <&pmi632_vadc>;
+	qcom,usbid-gpio = <&tlmm 124 0>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&gpio1_adc_default &otgid_int_default>;
+//LXF_P400_B01-1812 zhubolin 20181027 Y-cable support bringup end
 };
 
 &pmi632_pon {
@@ -30,13 +58,19 @@
 /{
 	mtp_batterydata: qcom,battery-data {
 		qcom,batt-id-range-pct = <15>;
-		#include "qg-batterydata-ascent-3450mah.dtsi"
-		#include "qg-batterydata-mlp356477-2800mah.dtsi"
+		#include "qg-batterydata-atl-4850mah.dtsi"
+		#include "qg-batterydata-sunwoda-4850mah.dtsi"
 	};
 };
 
 &pmi632_qg {
 	qcom,battery-data = <&mtp_batterydata>;
+	/*LXF_P400_C01-200 zhubolin 2018-11-8 add lwn ntc start*/
+	qcom,battery-atl = "ATL_4850mAH_FG_averaged_MasterSlave_Jan3th2019";
+	qcom,battery-lwn = "LWN_Sunwoda_4850mAH_FG_averaged_MasterSlave_Jan3th2019";
+	/*LXF_P400_C01-200 zhubolin 2018-11-8 add lwn ntc end*/
+	qcom,qg-iterm-ma = <270>;
+	qcom,esr-disable;
 };
 
 &pmi632_charger {
@@ -46,6 +80,18 @@
 &pmi632_vadc {
 	pinctrl-names = "default";
 	pinctrl-0 = <&quiet_therm_default &smb_therm_default>;
+//LXF_P400_B01-1812 zhubolin 20181027 Y-cable support bringup start
+	chan@12 {
+		label = "usbid";
+		reg = <0x12>; 
+		qcom,decimation = <0>;
+		qcom,pre-div-channel-scaling = <0>; //1:1 scaling
+		qcom,calibration-type = "absolute";
+		qcom,scale-function = <0>;
+		qcom,hw-settle-time = <0>;
+		qcom,fast-avg-setup = <0>;
+	};
+//LXF_P400_B01-1812 zhubolin 20181027 Y-cable support bringup end
 };
 
 &pmi632_gpios {
@@ -62,6 +108,16 @@
 			bias-high-impedance;
 		};
 	};
+//LXF_P400_B01-1812 zhubolin 20181027 Y-cable support bringup start
+	gpio1_adc {
+		gpio1_adc_default: gpio1_adc_default {
+			pins = "gpio1"; /* GPIO 1 */
+			function = "normal"; /* normal */
+			bias-high-impedance; /* DISABLE GPIO1 for ADC*/
+			bias-disable;
+		};
+	};
+//LXF_P400_B01-1812 zhubolin 20181027 Y-cable support bringup end
 };
 
 &pm8953_typec {

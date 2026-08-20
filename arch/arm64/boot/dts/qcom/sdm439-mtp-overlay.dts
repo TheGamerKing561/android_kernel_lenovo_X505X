@@ -14,7 +14,8 @@
 /dts-v1/;
 /plugin/;
 
-#include "sdm439-mtp.dtsi"
+//#include "sdm439-mtp.dtsi"
+#include "sdm439-mtp-p407.dtsi"
 
 / {
 	model = "MTP";

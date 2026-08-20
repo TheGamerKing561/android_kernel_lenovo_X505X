@@ -353,5 +353,10 @@ config ARCH_ZYNQMP
 	bool "Xilinx ZynqMP Family"
 	help
 	  This enables support for Xilinx ZynqMP Family
+	  
+config KERNEL_CUSTOM_P407
+	bool "KERNEL_CUSTOM_P407"
+	help
+	  This enables support for KERNEL_CUSTOM_P407
 
 endmenu

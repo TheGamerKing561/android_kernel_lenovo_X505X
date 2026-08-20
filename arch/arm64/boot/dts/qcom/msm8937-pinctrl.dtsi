@@ -171,18 +171,18 @@
 				};
 			};
 		};
-
+/*   add by mike_zhu 20181023  for lcd ----start---- */
 		nfc {
 			nfc_int_active: nfc_int_active {
 				/* active state */
 				mux {
 					/* GPIO 17 NFC Read Interrupt */
-					pins = "gpio17";
+					//pins = "gpio17";
 					function = "gpio";
 				};
 
 				config {
-					pins = "gpio17";
+					//pins = "gpio17";
 					drive-strength = <2>; /* 2 MA */
 					bias-pull-up;
 				};
@@ -192,28 +192,29 @@
 				/* sleep state */
 				mux {
 					/* GPIO 17 NFC Read Interrupt */
-					pins = "gpio17";
+					//pins = "gpio17";
 					function = "gpio";
 				};
 
 				config {
-					pins = "gpio17";
+					//pins = "gpio17";
 					drive-strength = <2>; /* 2 MA */
 					bias-pull-up;
 				};
 			};
-
+/*   add by mike_zhu 20181023  for lcd ----end---- */
+/*   add by andy_guo 20181023  for TP ---START---- */
 			nfc_disable_active: nfc_disable_active {
 				/* active state */
 				mux {
 					/* 16: NFC ENABLE 130: FW DNLD */
 					/* 93: ESE Enable */
-					pins = "gpio16", "gpio130", "gpio93";
+					pins = "gpio93";
 					function = "gpio";
 				};
 
 				config {
-					pins = "gpio16", "gpio130", "gpio93";
+					pins =  "gpio93";
 					drive-strength = <2>; /* 2 MA */
 					bias-pull-up;
 				};
@@ -224,18 +225,18 @@
 				mux {
 					/* 16: NFC ENABLE 130: FW DNLD */
 					/* 93: ESE Enable */
-					pins = "gpio16", "gpio130", "gpio93";
+					pins =  "gpio93";
 					function = "gpio";
 				};
 
 				config {
-					pins = "gpio16", "gpio130", "gpio93";
+					pins =  "gpio93";
 					drive-strength = <2>; /* 2 MA */
 					bias-disable;
 				};
 			};
 		};
-
+/*   add by andy_guo 20181023  for TP ---end---- */
 		tlmm_pmi_flash_led {
 			rear_flash_led_enable: rear_flash_led_enable {
 				mux {
@@ -289,18 +290,31 @@
 				};
 			};
 		};
+/* LXF_P400_B01-303  add by litao1 20181106  begin */
+	        ovp-id-pin {
+	         	          qcom,pins = <&tlmm 25>;
+			          qcom,num-grp-pins = <1>;
+		                  qcom,pin-func = <0>;
+		                  label = "ovp-id-pin";
+			         ovp_default: ovp-irq {
+					    	drive-strength = <8>;
+						bias-pull-up;
+			          };
+			};
+/* LXF_P400_B01-303  add by litao1 20181106  end */
 
+	/* LXF_P400_B01-280 add by guofuping 20181029  begin */
 		spi3 {
 			spi3_default: spi3_default {
 				/* active state */
 				mux {
 					/* MOSI, MISO, CLK */
-					pins = "gpio8", "gpio9", "gpio11";
+					pins = "gpio9", "gpio11";
 					function = "blsp_spi3";
 				};
 
 				config {
-					pins = "gpio8", "gpio9", "gpio11";
+					pins = "gpio9", "gpio11";
 					drive-strength = <12>; /* 12 MA */
 					bias-disable = <0>; /* No PULL */
 				};
@@ -310,12 +324,12 @@
 				/* suspended state */
 				mux {
 					/* MOSI, MISO, CLK */
-					pins = "gpio8", "gpio9", "gpio11";
+					pins = "gpio9", "gpio11";
 					function = "gpio";
 				};
 
 				config {
-					pins = "gpio8", "gpio9", "gpio11";
+					pins = "gpio9", "gpio11";
 					drive-strength = <2>; /* 2 MA */
 					bias-pull-down; /* PULL Down */
 				};
@@ -439,12 +453,12 @@
 		spi7 {
 			spi7_default: spi7_default {
 				mux {
-					pins = "gpio85", "gpio86", "gpio88";
+					pins = "gpio88";
 					function = "blsp_spi7";
 				};
 
 				config {
-					pins = "gpio85", "gpio86", "gpio88";
+					pins = "gpio88";
 					drive-strength = <16>;
 					bias-disable = <0>;
 				};
@@ -452,39 +466,39 @@
 
 			spi7_sleep: spi7_sleep {
 				mux {
-					pins = "gpio85", "gpio86", "gpio88";
+					pins = "gpio88";
 					function = "blsp_spi7";
 				};
 
 				config {
-					pins = "gpio85", "gpio86", "gpio88";
+					pins = "gpio88";
 					drive-strength = <16>;
 					bias-disable = <0>;
 				};
 			};
 			spi7_cs0_active: cs0_active {
 				mux {
-					pins = "gpio87";
+					//pins = "gpio87";
 					function = "blsp_spi7_cs0";
 				};
 
 				config {
-					pins = "gpio87";
+					//pins = "gpio87";
 					drive-strength = <2>;
 					bias-disable = <0>;
 				};
 			};
 		};
-
+//LXF_P400_B01-1812 zhubolin 20181027 Y-cable support bringup start
 		fpc_reset_int {
 			fpc_reset_low: reset_low {
 				mux {
-					pins = "gpio124";
+					pins = "";
 					function = "fpc_reset_gpio_low";
 				};
 
 				config {
-					pins = "gpio124";
+					pins = "";
 					drive-strength = <2>;
 					bias-disable;
 					output-low;
@@ -493,24 +507,24 @@
 
 			fpc_reset_high: reset_high {
 				mux {
-					pins = "gpio124";
+					pins = "";
 					function = "fpc_reset_gpio_high";
 				};
 
 				config {
-					pins = "gpio124";
+					pins = "";
 					drive-strength = <2>;
 					bias-disable;
 					output-high;
 				};
 			};
-
+//LXF_P400_B01-1812 zhubolin 20181027 Y-cable support bringup end
 			fpc_int_low: int_low {
 				mux {
-					pins = "gpio48";
+					pins = "";
 				};
 				config {
-					pins = "gpio48";
+					pins = "";
 					drive-strength = <2>;
 					bias-pull-down;
 					input-enable;
@@ -728,16 +742,16 @@
 			};
 
 		};
-
+/*   add by mike_zhu 20181023  for lcd ----start---- */
 		pmx_mdss: pmx_mdss {
 			mdss_dsi_active: mdss_dsi_active {
 				mux {
-					pins = "gpio60", "gpio98", "gpio99";
+					pins = "gpio60";
 					function = "gpio";
 				};
 
 				config {
-					pins = "gpio60", "gpio98", "gpio99";
+					pins = "gpio60";
 					drive-strength = <8>; /* 8 mA */
 					bias-disable = <0>; /* no pull */
 					output-high;
@@ -745,19 +759,19 @@
 			};
 			mdss_dsi_suspend: mdss_dsi_suspend {
 				mux {
-					pins = "gpio60", "gpio98", "gpio99";
+					pins = "gpio60";
 					function = "gpio";
 				};
 
 				config {
-					pins = "gpio60", "gpio98", "gpio99";
+					pins = "gpio60";
 					drive-strength = <2>; /* 2 mA */
 					bias-pull-down; /* pull down */
 					input-enable;
 				};
 			};
 		};
-
+/*   add by mike_zhu 20181023  for lcd ----end---- */
 		pmx_mdss_te {
 			mdss_te_active: mdss_te_active {
 				mux {
@@ -796,16 +810,16 @@
 				bias-pull-up;
 			};
 		};
-
+/*   add by mike_zhu 20181023  for key ----start---- */
 		tlmm_gpio_key {
 			gpio_key_active: gpio_key_active {
 				mux {
-					pins = "gpio91", "gpio127", "gpio128";
+					pins = "gpio91";
 					function = "gpio";
 				};
 
 				config {
-					pins = "gpio91", "gpio127", "gpio128";
+					pins = "gpio91";
 					drive-strength = <2>;
 					bias-pull-up;
 				};
@@ -813,18 +827,69 @@
 
 			gpio_key_suspend: gpio_key_suspend {
 				mux {
-					pins = "gpio91", "gpio127", "gpio128";
+					pins = "gpio91";
 					function = "gpio";
 				};
 
 				config {
-					pins = "gpio91", "gpio127", "gpio128";
+					pins = "gpio91";
 					drive-strength = <2>;
 					bias-pull-up;
 				};
 			};
 		};
+/*   add by mike_zhu 20181023  for key ----end---- */
 
+/*   add by andy_guo 20181121  for TP ---start---- */              
+	/* add pingrp for touchscreen */
+	ts_int_default: ts_int_defalut {
+		mux {
+			pins = "gpio65";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio65";
+			drive-strength = <16>;
+			/*bias-pull-up;*/
+			input-enable;
+			bias-disable;
+		};
+	};
+
+	ts_int_output_high: ts_int_output_high {
+		mux {
+			pins = "gpio65";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio65";
+			output-high;
+		};
+	};
+
+	ts_int_output_low: ts_int_output_low {
+		mux {
+			pins = "gpio65";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio65";
+			output-low;
+		};
+	};
+
+	ts_int_input: ts_int_input {
+		mux {
+			pins = "gpio65";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio65";
+			input-enable;
+			bias-disable;
+		};
+	};
+/*   add by andy_guo 20181121  for TP ---END---- */
 		/* add pingrp for touchscreen */
 		pmx_ts_int_active {
 			ts_int_active: ts_int_active {
@@ -1284,17 +1349,74 @@
 				};
 			};
 		};
+/* LXF_P400_A01-49 add by wangyongfu 20180910  begin */
+		ext-rec-pa-det {
+			cross_ext_rec_act: cross_ext_rec_act {
+				mux {
+					pins = "gpio19";
+					function = "gpio";
+				};
+
+				config {
+					pins = "gpio19";
+					output-high;
+					drive-strength = <8>;
+				};
+			};
+
+			cross_ext_rec_sus: cross_ext_rec_sus {
+				mux {
+					pins = "gpio19";
+					function = "gpio";
+				};
+
+				config {
+					pins = "gpio19";
+					output-low;
+					drive-strength = <2>;
+				};
+			};
+		};
+
+		ext-spk-pa-det {
+			cross_ext_spk_act: cross_ext_spk_act {
+				mux {
+					pins = "gpio48";
+					function = "gpio";
+				};
+
+				config {
+					pins = "gpio48";
+					output-high;
+					drive-strength = <8>;
+				};
+			};
+
+			cross_ext_spk_sus: cross_ext_spk_sus {
+				mux {
+					pins = "gpio48";
+					function = "gpio";
+				};
+
+				config {
+					pins = "gpio48";
+					output-low;
+					drive-strength = <2>;
+				};
+			};
+		};
+/* LXF_P400_A01-49 add by wangyongfu 20180910  end */
 
 		/* WSA VI sense */
 		wsa-vi {
 			wsa_vi_on: wsa_vi_on {
 				mux {
-					pins = "gpio94", "gpio95";
+					pins = "gpio95";
 					function = "wsa_io";
 				};
 
 				config {
-					pins = "gpio94", "gpio95";
+					pins = "gpio95";
 					drive-strength = <8>; /* 8 MA */
 					bias-disable; /* NO pull */
 				};
@@ -1302,12 +1424,12 @@
 
 			wsa_vi_off: wsa_vi_off {
 				mux {
-					pins = "gpio94", "gpio95";
+					pins = "gpio95";
 					function = "wsa_io";
 				};
 
 				config {
-					pins = "gpio94", "gpio95";
+					pins = "gpio95";
 					drive-strength = <2>; /* 2 MA */
 					bias-pull-down;
 				};
@@ -1347,12 +1469,12 @@
 		wsa_clk {
 			wsa_clk_on: wsa_clk_on {
 				mux {
-					pins = "gpio25";
+					//pins = "gpio25";
 					function = "pri_mi2s_mclk_a";
 				};
 
 				config {
-					pins = "gpio25";
+					//pins = "gpio25";
 					drive-strength = <8>; /* 8 MA */
 					output-high;
 				};
@@ -1360,12 +1482,12 @@
 
 			wsa_clk_off: wsa_clk_off {
 				mux {
-					pins = "gpio25";
+					///pins = "gpio25";
 					function = "pri_mi2s_mclk_a";
 				};
 
 				config {
-					pins = "gpio25";
+					///pins = "gpio25";
 					drive-strength = <2>; /* 2 MA */
 					output-low;
 					bias-pull-down;
@@ -1375,24 +1497,24 @@
 		pri-tlmm-lines {
 			pri_tlmm_lines_act: pri_tlmm_lines_act {
 				mux {
-					pins = "gpio85", "gpio88";
+					pins = "gpio88";
 					function = "pri_mi2s";
 				};
 
 				config {
-					pins = "gpio85", "gpio88";
+					pins = "gpio88";
 					drive-strength = <8>;
 				};
 			};
 
 			pri_tlmm_lines_sus: pri_tlmm_lines_sus {
 				mux {
-					pins = "gpio85", "gpio88";
+					pins = "gpio88";
 					function = "pri_mi2s";
 				};
 
 				config {
-					pins = "gpio85", "gpio88";
+					pins = "gpio88";
 					drive-strength = <2>;
 					bias-pull-down;
 				};
@@ -1402,30 +1524,30 @@
 		pri-tlmm-ws-lines {
 			pri_tlmm_ws_act: pri_tlmm_ws_act {
 				mux {
-					pins = "gpio87";
+					//pins = "gpio87";
 					function = "pri_mi2s_ws";
 				};
 
 				config {
-					pins = "gpio87";
+					//pins = "gpio87";
 					drive-strength = <8>;
 				};
 			};
 
 			pri_tlmm_ws_sus: pri_tlmm_ws_sus {
 				mux {
-					pins = "gpio87";
+					//pins = "gpio87";
 					function = "pri_mi2s_ws";
 				};
 
 				config {
-					pins = "gpio87";
+					//pins = "gpio87";
 					drive-strength = <2>;
 					bias-pull-down;
 				};
 			};
 		};
-
+	/* LXF_P400_B01-280 add by guofuping 20181029  end */
 		pmx_sdc1_clk {
 			sdc1_clk_on: sdc1_clk_on {
 				config {
@@ -1706,7 +1828,7 @@
 				drive-strength = <2>; /* 2 MA */
 			};
 		};
-
+		
 		cam_sensor_rear_reset: cam_sensor_rear_reset {
 			/* RESET */
 			mux {
@@ -1849,15 +1971,16 @@
 			};
 		};
 
+//begin add front camera by chenbaicheng 20181101
 		cam_sensor_front_default: cam_sensor_front_default {
 			/* RESET, STANDBY */
 			mux {
-				pins = "gpio38","gpio50";
+				pins = "gpio38","gpio132";
 				function = "gpio";
 			};
 
 			config {
-				pins = "gpio38","gpio50";
+				pins = "gpio38","gpio132";
 				bias-disable; /* No PULL */
 				drive-strength = <2>; /* 2 MA */
 			};
@@ -1866,16 +1989,17 @@
 		cam_sensor_front_sleep: cam_sensor_front_sleep {
 			/* RESET, STANDBY */
 			mux {
-				pins = "gpio38","gpio50";
+				pins = "gpio38","gpio132";
 				function = "gpio";
 			};
 
 			config {
-				pins = "gpio38","gpio50";
+				pins = "gpio38","gpio132";
 				bias-disable; /* No PULL */
 				drive-strength = <2>; /* 2 MA */
 			};
 		};
+//end add front camera by chenbaicheng 20181101
 
 		cam_sensor_mclk2_default: cam_sensor_mclk2_default {
 			/* MCLK2 */
@@ -1934,5 +2058,111 @@
 				drive-strength = <2>; /* 2 MA */
 			};
 		};
+		/** LXF_P400 add by liuyang 20181027  begin **/
+		hall_int_pin{
+			hall_int_active:hall_int_active {
+				mux {
+					pins = "gpio43";
+					function = "gpio";
+				};
+				config{
+					pins = "gpio43";
+					drive-strength = <6>;
+					bias-pull-up;
+				};
+			};
+			hall_int_suspend: hall_int_suspend {
+				mux {
+					pins = "gpio43";
+					function = "gpio";
+				};
+				config{
+					pins = "gpio43";
+					drive-strength = <6>;
+					bias-pull-up;
+				};
+			};
+		};
+
+                abov_int_default: abov_int_default{
+                       mux{
+                             pins = "gpio21";
+                             function = "gpio";
+                     };
+
+                     config{
+                             pins = "gpio21";
+                             drive-strength = <2>;
+                             bias-disable;
+                    };
+                  
+
+                };
+		/** LXF_P400 add by liuyang 20181027 end **/
+
+                /* Lct add for pogo begin */
+		pogo_int_pin{
+			pogo_int_active:pogo_int_active {
+				mux {
+					pins = "gpio90";
+					function = "gpio";
+				};
+				config{
+					pins = "gpio90";
+					drive-strength = <6>;
+					bias-pull-up;
+				};
+			};
+			pogo_int_suspend: pogo_int_suspend {
+				mux {
+					pins = "gpio90";
+					function = "gpio";
+				};
+				config{
+					pins = "gpio90";
+					drive-strength = <6>;
+					bias-pull-up;
+				};
+			};
+		};
+                /* Lct add for pogo end!! */
+		usb_int_pin{
+			usb_int_active:usb_int_active {
+				mux {
+					pins = "gpio86";
+					function = "gpio";
+				};
+				config{
+					pins = "gpio86";
+					drive-strength = <6>;
+					bias-pull-up;
+				};
+			};
+			usb_int_suspend: usb_int_suspend {
+				mux {
+					pins = "gpio86";
+					function = "gpio";
+				};
+				config{
+					pins = "gpio86";
+					drive-strength = <6>;
+					bias-pull-up;
+				};
+			};
+		};
+//LXF_P400_B01-1812 zhubolin 20181027 Y-cable support bringup start
+		otgid_int_default: otgid_int_default{
+			mux{
+				pins = "gpio124";
+ 				function = "gpio";
+			};
+
+			config{
+				pins = "gpio124";
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+//LXF_P400_B01-1812 zhubolin 20181027 Y-cable support bringup end
 	};
 };

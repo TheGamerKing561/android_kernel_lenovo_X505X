@@ -370,16 +370,16 @@
 			output-enable;
 		};
 	};
-
+	/* LXF_P400_B01-280 add by guofuping 20181029  begin */
 	pmi632_sense {
 		/* GPIO 7 and 8 are external-sense pins for PMI632 */
 		pmi632_sense_default: pmi632_sense_default {
-			pins = "gpio7", "gpio8";
+			pins = "gpio7";
 			bias-high-impedance;	/* disable the GPIO */
 			bias-disable;		/* no-pull */
 		};
 	};
-
+	/* LXF_P400_B01-280 add by guofuping 20181029  end */
 	pmi632_ctm {
 		/* Disable GPIO1 for h/w base mitigation */
 		pmi632_ctm_default: pmi632_ctm_default {

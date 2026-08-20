@@ -581,8 +581,8 @@
 		pinctrl-names = "i2c_active", "i2c_sleep";
 		pinctrl-0 = <&i2c_3_active>;
 		pinctrl-1 = <&i2c_3_sleep>;
-		qcom,noise-rjct-scl = <0>;
-		qcom,noise-rjct-sda = <0>;
+		qcom,noise-rjct-scl = <3>;
+		qcom,noise-rjct-sda = <3>;
 		qcom,master-id = <86>;
 		dmas = <&dma_blsp1 8 64 0x20000020 0x20>,
 			<&dma_blsp1 9 32 0x20000020 0x20>;
@@ -1187,6 +1187,13 @@
 			label = "modem";
 		};
 	};
+
+	sn_fuse: snfuse@0xA4128 {
+		         compatible = "qcom,sn-fuse";
+		         reg = <0xA60A8 0x4>,
+		             <0xA01D0 0x4>;
+		         reg-names = "sn-base","fuse-state";
+        	};
 
 	jtag_mm0: jtagmm@61bc000 {
 		compatible = "qcom,jtagv8-mm";

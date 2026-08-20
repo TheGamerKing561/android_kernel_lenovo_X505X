@@ -1,6 +1,9 @@
 #Android makefile to build kernel as a part of Android Build
 PERL		= perl
 
+# liuyang add for SAR sensor config 2018.12.25 start
+KERNEL_CONFIG_OVERRIDE :=
+# liuyang add for SAR sensor config 2018.12.25 end
 KERNEL_TARGET := $(strip $(INSTALLED_KERNEL_TARGET))
 ifeq ($(KERNEL_TARGET),)
 INSTALLED_KERNEL_TARGET := $(PRODUCT_OUT)/kernel
@@ -38,10 +41,26 @@ endif
 # Force 32-bit binder IPC for 64bit kernel with 32bit userspace
 ifeq ($(KERNEL_ARCH),arm64)
 ifeq ($(TARGET_ARCH),arm)
-KERNEL_CONFIG_OVERRIDE := CONFIG_ANDROID_BINDER_IPC_32BIT=y
+KERNEL_CONFIG_OVERRIDE += CONFIG_ANDROID_BINDER_IPC_32BIT=y
 endif
 endif
 
+
+# liuyang add for SAR sensor config 2018.12.25 start
+ifeq ($(LCT_PROJECT_NAME),lxf_p400_b01)
+KERNEL_CONFIG_OVERRIDE += CONFIG_BUILD_B01=y
+endif
+
+ifeq ($(LCT_PROJECT_NAME),lxf_p400_b02)
+KERNEL_CONFIG_OVERRIDE += CONFIG_BUILD_B02=y
+endif
+# liuyang add for SAR sensor config 2018.12.25 end
+
+###lc mike_zhu  for ssr 20190214 start 
+ifeq ($(LCT_BUILD_TYPE),FACTORY)
+KERNEL_CONFIG_OVERRIDE += CONFIG_BUILD_FACTORY=y
+endif
+###lc mike_zhu  for ssr 20190214 end 
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := $(strip $(TARGET_KERNEL_CROSS_COMPILE_PREFIX))
 ifeq ($(TARGET_KERNEL_CROSS_COMPILE_PREFIX),)
 KERNEL_CROSS_COMPILE := arm-eabi-

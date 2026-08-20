@@ -728,5 +728,6 @@
 };
 
 &usb_otg {
-	qcom,hsusb-otg-phy-init-seq = <0x43 0x80 0x06 0x82 0xffffffff>;
+/*LXF_P400_C01-203 zhubolin 2018-11-16 usb eye diagram test fail*/
+	qcom,hsusb-otg-phy-init-seq = <0x39 0x81 0x37 0x82 0xffffffff>;
 };
